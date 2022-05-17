@@ -8,9 +8,9 @@ public class Person implements Serializable {
     private String name;
     private int room;
     private String position;
-    private int image;
+    private String image;
 
-    public Person(String name, int room, String position, int image){
+    public Person(String name, int room, String position, String image){
         this.name = name;
         this.room = room;
         this.position = position;
@@ -41,11 +41,11 @@ public class Person implements Serializable {
         this.position = position;
     }
 
-    public int getImage() {
+    public String getImage() {
         return image;
     }
 
-    public void setImage(int image) {
+    public void setImage(String image) {
         this.image = image;
     }
 }

@@ -15,6 +15,7 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.doctors.R;
 import com.example.doctors.databinding.ItemLayoutBinding;
 import com.example.doctors.models.Person;
@@ -42,10 +43,7 @@ public class DoctorsAdapter extends RecyclerView.Adapter<DoctorsAdapter.ViewHold
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         final Person person = doctors.get(position);
-        holder.binding.name.setText(person.getName());
-        holder.binding.room.setText("Room: " + person.getRoom());
-        holder.binding.position.setText("Positions: " + person.getPosition());
-        holder.binding.image.setImageDrawable(ContextCompat.getDrawable(holder.binding.getRoot().getContext(), person.getImage()));
+        holder.onBind(person);
         holder.binding.dropdownMenu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -83,6 +81,12 @@ public class DoctorsAdapter extends RecyclerView.Adapter<DoctorsAdapter.ViewHold
         public ViewHolder(@NonNull ItemLayoutBinding itemView) {
             super(itemView.getRoot());
             this.binding = itemView;
+        }
+        public void onBind(Person person){
+            binding.name.setText(person.getName());
+            binding.room.setText(String.valueOf(person.getRoom()));
+            binding.position.setText(person.getPosition());
+            Glide.with(binding.getRoot()).load(person.getImage()).into(binding.image);
         }
 
     }
